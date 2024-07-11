@@ -27,6 +27,7 @@ public class Ex07 {
 			int mainMenu = Integer.parseInt(sc.nextLine());
 			String id = "qwer";
 			String pw = "123456";
+			
 			switch (mainMenu) {
 			case 1:
 				System.out.println("로그인 처리");
