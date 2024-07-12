@@ -11,7 +11,7 @@ import java.util.Scanner;
  * 로그인정보: 이름, 주민번호 6자리) 
  * 예금/출금 정보(잔고)
  */
-public class Ex07 {
+public class Project1 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
