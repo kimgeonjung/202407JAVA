@@ -11,29 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/main")
 public class Start extends HttpServlet {
-	
     public Start() {
     	System.out.println("Start 서블릿 생성");
     }
-    
-
-//	@Override
-//	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		System.out.println("service() 호출");
-//	}
-
 
 	@Override
 	public void destroy() {
 		System.out.println("destory() 호출");
 	}
 
-
 	@Override
 	public void init() throws ServletException {
 		System.out.println("init() 호출");
 	}
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
