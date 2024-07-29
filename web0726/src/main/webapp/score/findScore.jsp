@@ -8,16 +8,11 @@
 String URL = "jdbc:mysql://localhost:3307/spring5fs";
 Class.forName("com.mysql.cj.jdbc.Driver");
 Connection conn = DriverManager.getConnection(URL, "root", "mysql");
-String location = request.getParameter("loc");
-if("".equals(location)){
-	location = "%";
-}
-String sql = "select * from dept where loc like ?";
+String sql = "select * from score where num = ?";
 PreparedStatement pstmt = conn.prepareStatement(sql);
-pstmt.setString(1, location);
+pstmt.setString(1, "321");
 ResultSet rs = pstmt.executeQuery();
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,25 +20,16 @@ ResultSet rs = pstmt.executeQuery();
 <title>Insert title here</title>
 </head>
 <body>
-<form>
-지역
-<input type="text" name="loc">
-<input type="submit">
-</form>
-<p/>
-<table border="1">
-<tr><th colspan="3">DEPT 테이블</th></tr>
-<tr><td>부서번호</td><td>부서이름</td><td>지역</td></tr>
 <%
-while(rs.next()){
-	String deptno = rs.getString("deptno");
-	String dname = rs.getString("dname");
-	String loc = rs.getString("loc");
-%>
-<tr><td><%=deptno %></td><td><%=dname %></td><td><%=loc %></td></tr>
-<%
+if(rs.next()){
+	String num = rs.getString("num");
+	String name = rs.getString("name");
+	String kor = rs.getString("kor");
+	String eng = rs.getString("eng");
+	String math = rs.getString("math");
+	out.print(num+", "+name+", "+kor+", "+eng+", "+math);
+	
 }
 %>
-</table>
 </body>
 </html>
