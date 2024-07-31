@@ -1,0 +1,26 @@
+package java0731_1;
+
+public class Ex7 {
+	public static void personInfo(Person person) {
+		System.out.println("name: "+ person.name);
+		person.walk();
+		
+		if(person instanceof Student student) {
+			student.study();
+		}
+		
+//		if(person instanceof Student) {
+//		Student student = (Student) person;
+//		student.study();
+//		}else {
+//			System.out.println("형변환불가능");
+//		}
+	}
+	public static void main(String[] args) {
+		Person p1 = new Person("홍씨");
+		personInfo(p1);
+		System.out.println("------------------------------------");
+		Student student = new Student("김씨", 30);
+		personInfo(student);
+	}
+}

@@ -120,7 +120,7 @@ th {
 			<th>잔고</th>
 			<th>삭제</th>
 		</tr>
-		<%
+<%
 sqlTmp = "select * from account";
 pstmt = conn.prepareStatement(sqlTmp);
 ResultSet rs = pstmt.executeQuery();

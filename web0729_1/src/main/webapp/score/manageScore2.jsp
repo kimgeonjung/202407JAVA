@@ -37,7 +37,6 @@ if(num != null){
 	ResultSet rs = pstmt.executeQuery();
 	rs.next();
 	int cnt = rs.getInt(1); // 0: insert, 1: update
-	
 	if(cnt == 1){	// 정보 수정
 		sqlTmp = "update score set name = ?, kor = ?, eng = ?, math = ? where num = ?";
 		pstmt = conn.prepareStatement(sqlTmp);
