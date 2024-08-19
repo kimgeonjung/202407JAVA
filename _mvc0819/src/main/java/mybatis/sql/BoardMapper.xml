@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+	<select id="getNumRecords" resultType="int">
+		select count(*) from board
+	</select>
+
+    <select id="selectList" resultType="com.board.db.BoardDto" parameterType="map">
+        select * from board order by num desc limit #{start}, #{listsize}
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="com.board.db.BoardDto">
+        select * from board where num = #{num}
+    </select>
+    
+    <update id="updateHits">
+    	update board set hits = hits + 1 where num = #{num}
+    </update>
+
+    <insert id="insertOne" parameterType="com.board.db.BoardDto">
+    	insert into board (writer, title, content, regtime, hits)
+        values (#{writer}, #{title}, #{content}, now(), #{hits})
+    </insert>
+
+    <update id="updateOne" parameterType="com.board.db.BoardDto">
+    	update board 
+    	set writer = #{writer}, title = #{title}, content = #{content}, 
+    	regtime = now() where num = #{num}
+    </update>
+
+    <delete id="deleteOne" parameterType="int">
+        delete from board where num = #{num}
+    </delete>
+</mapper>

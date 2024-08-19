@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+	<select id="getNumRecords" resultType="com.board.db.BoardDTO">
+		select count(*) from board
+	</select>
+<!-- 
+    <select id="selectAllWebhard" resultType="webhard.Webhard">
+        SELECT * FROM webhard
+    </select>
+
+    <insert id="insertWebhard" parameterType="webhard.Webhard">
+        insert into webhard (fname, ftime, fsize) 
+        VALUES (#{fname}, #{ftime}, #{fsize})
+    </insert>
+
+    <delete id="deleteWebhard" parameterType="int">
+        delete from webhard where num = #{num}
+    </delete>
+
+    <select id="selectWebhardBynum" parameterType="int" resultType="webhard.Webhard">
+        select * from webhard where num = #{num}
+    </select>
+     -->
+</mapper>
