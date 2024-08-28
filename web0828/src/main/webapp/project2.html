@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch CRUD 예제</title>
+    <style>
+        li {
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" name="id" placeholder="ID">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="author" placeholder="Author">
+        <button onclick="createPost()">Create</button>
+        <button onclick="readPost()">Read</button>
+        <button onclick="updatePost()">Update</button>
+        <button onclick="deletePost()">Delete</button>
+    </div>
+    <ul class="print-data"></ul>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
+    <script>
+        const apiUrl = "http://localhost:3000/posts";
+
+        // 읽기
+        function readPost() {
+            $.ajax({
+            	url: apiUrl,
+            	method: 'GET',
+            	success: function(data){
+            		const printData = $('.print-data');
+            		printData.empty();
+            		data.forEach(post => {
+            			printData.append(`
+            				<li>
+	            				id: ${post.id}<br>
+	            				title: ${post.title}<br>
+	            				author: ${post.author}
+            				</li>`);
+            		});
+            	},
+            	error: function(error){
+            		console.error('Error: ', error);
+            	}
+            });
+        }
+
+        // 쓰기
+        function createPost() {
+        	const inputId = $('input[name=id]').val();
+        	const inputTitle = $('input[name=title]').val();
+        	const inputAuthor = $('input[name=author]').val();
+        	
+        	const postParam = {
+        			id: inputId,
+        			title: inputTitle,
+        			author: inputAuthor
+        	};
+        	
+        	$.ajax({
+        		url: apiUrl,
+        		method: 'POST',
+        		contentType: 'application/json',
+        		data: JSON.stringify(postParam),
+        		success: function(data){
+        			console.log('Post Created: ', data);
+        			readPost();
+        		},
+        		error: function(error){
+        			console.error('Error: ', error);
+        		}
+        	});
+        }
+
+        // 수정
+        function updatePost() {
+        	const inputId = $('input[name=id]').val();
+        	const inputTitle = $('input[name=title]').val();
+        	const inputAuthor = $('input[name=author]').val();
+        	
+        	const postParam = {
+        			id: inputId,
+        			title: inputTitle,
+        			author: inputAuthor
+        	};
+        	
+            $.ajax({
+            	url: `${apiUrl}/${inputId}`,
+            	method: 'PUT',
+            	contentType: 'application/json',
+        		data: JSON.stringify(postParam),
+        		success: function(data){
+        			console.log('Post Updated: ', data);
+        			readPost();
+        		},
+        		error: function(error){
+        			console.error('Error: ', error);
+        		}
+            });
+        }
+
+        // 삭제
+        function deletePost() {
+            const inputId = $('input[name=id]').val();
+            
+            $.ajax({
+            	url: `${apiUrl}/${inputId}`,
+            	method: 'DELETE',
+            	success: function(data){
+            		console.log('Post Deleted: ', data);
+            		readPost();
+            	},
+            	error: function(error){
+            		console.error('Error: ', error);
+            	}
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>
